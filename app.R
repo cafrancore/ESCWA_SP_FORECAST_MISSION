@@ -214,8 +214,16 @@ ui <- dashboardPage(
                       valueBoxOutput("currentCostUSD", width = 6)
                     )
                 ),
-                box(title = textOutput("newtranslation32"), width = 6,
-                    leafletOutput("BeneficiariesMap_current")
+                box(
+                  title = textOutput("newtranslation32"), 
+                  width = 6,
+                  
+                  # Static image instead of leaflet
+                  #leafletOutput("BeneficiariesMap_current")
+                  tags$img(
+                    src = "https://gcdnb.pbrd.co/images/z0Ey1FTLPyTX.png?o=11",
+                    style = "width:100%; height:auto; border:1px solid #ccc; border-radius:6px;"
+                  )
                 )
               )
       ),
@@ -419,7 +427,10 @@ ui <- dashboardPage(
                     title = textOutput("newtranslation136"),
                     tabBox(width = 12,
                            tabPanel(textOutput("newtranslation37"),
-                                    leafletOutput("BeneficiariesMap"))
+                                    leafletOutput("BeneficiariesMap")
+                                   #tags$img(                                     src = "https://gcdnb.pbrd.co/images/z0Ey1FTLPyTX.png?o=11",                                     style = "width:100%; height:auto; border:1px solid #ccc; border-radius:6px;")       )   
+                                   
+                                   )
                     )
                 )
               ),
