@@ -1220,7 +1220,7 @@ output$UCT_compare_value <- renderUI({
   df <- filtered_data()
   boxes <- lapply(1:nrow(df), function(i) {
     valueBox(
-      value = formatC(df[["value_yearly_usd_CT"]][i], format = "d", big.mark = ","),
+      value = formatC(df[["value_yearly_jod_CT"]][i], format = "d", big.mark = ","),
       subtitle = df[["Scenario_name"]][i],
       color = "aqua",
       icon = icon("users")
@@ -1243,7 +1243,7 @@ output$scenarioBarChart2 <- renderPlot({
   df <- filtered_value()
   req(nrow(df) > 0)
   
-  heights <- df[["value_yearly_usd_CT"]]
+  heights <- df[["value_yearly_jod_CT"]]
   #names <- df[["Scenario_name"]]
   
   # Color gradient to highlight variations
@@ -1564,12 +1564,12 @@ output$dynamicBarChart2 <- renderPlot({
   
   # Use labels directly
   bp <- barplot(
-    height = df_dyn$value_yearly_usd_CT,
+    height = df_dyn$value_yearly_jod_CT,
     names.arg = df_dyn$Short_name,  
     col = bar_colors,
     border = "white",
     space = 0.6,
-    ylim = c(0, max(df_dyn$value_yearly_usd_CT, na.rm = TRUE) * 1.25),
+    ylim = c(0, max(df_dyn$value_yearly_jod_CT, na.rm = TRUE) * 1.25),
     ylab = "USD year",
     las = 2,           # rotate x labels vertical to fit
     cex.names = 0.9    # slightly smaller names
@@ -1578,20 +1578,20 @@ output$dynamicBarChart2 <- renderPlot({
   # Values on top
   text(
     x = bp,
-    y = df_dyn$value_yearly_usd_CT,
-    labels = format(df_dyn$value_yearly_usd_CT, big.mark = ","),
+    y = df_dyn$value_yearly_jod_CT,
+    labels = format(df_dyn$value_yearly_jod_CT, big.mark = ","),
     pos = 3,
     cex = 0.9
   )
   
   # Optional trend line
-  lines(x = bp, y = df_dyn$value_yearly_usd_CT, type = "b", lwd = 2, col = "darkblue", pch = 16)
+  lines(x = bp, y = df_dyn$value_yearly_jod_CT, type = "b", lwd = 2, col = "darkblue", pch = 16)
   
   # Optional % change labels between bars
   if (nrow(df_dyn) >= 2) {
     for (i in 2:nrow(df_dyn)) {
-      prev <- df_dyn$value_yearly_usd_CT[i - 1]
-      curr <- df_dyn$value_yearly_usd_CT[i]
+      prev <- df_dyn$value_yearly_jod_CT[i - 1]
+      curr <- df_dyn$value_yearly_jod_CT[i]
       if (prev > 0 && is.finite(prev) && is.finite(curr)) {
         pct_change <- round((curr - prev) / prev * 100, 1)
         label <- paste0(ifelse(pct_change >= 0, "+", ""), pct_change, "%")
