@@ -219,11 +219,11 @@ ui <- dashboardPage(
                   width = 6,
                   
                   # Static image instead of leaflet
-                  #leafletOutput("BeneficiariesMap_current")
-                  tags$img(
-                    src = "https://gcdnb.pbrd.co/images/z0Ey1FTLPyTX.png?o=11",
-                    style = "width:100%; height:auto; border:1px solid #ccc; border-radius:6px;"
-                  )
+                  leafletOutput("BeneficiariesMap_current")
+                  #tags$img(
+                   # src = "https://gcdnb.pbrd.co/images/z0Ey1FTLPyTX.png?o=11",
+                    #style = "width:100%; height:auto; border:1px solid #ccc; border-radius:6px;"
+                  #)
                 )
               )
       ),
@@ -726,7 +726,7 @@ output$BeneficiariesMap_current <- renderLeaflet({
   pal <- colorBin("viridis", domain = jordan$count, bins = 7, na.color = "#f0f0f0")
   
   leaflet(jordan) %>%
-    addProviderTiles(providers$CartoDB.Positron) %>%
+    addProviderTiles(providers$CartoDB.PositronNoLabels) %>%
     addPolygons(
       fillColor = ~pal(count),
       weight = 1,
@@ -945,7 +945,7 @@ output$BeneficiariesMap <- renderLeaflet({
   pal <- colorBin("viridis", domain = jordan$count, bins = 7, na.color = "#f0f0f0")
   
   leaflet(jordan) %>%
-    addProviderTiles(providers$CartoDB.Positron) %>%
+    addProviderTiles(providers$CartoDB.PositronNoLabels) %>%
     addPolygons(
       fillColor = ~pal(count),
       weight = 1,
